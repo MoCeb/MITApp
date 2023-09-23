@@ -1,2 +1,0 @@
-# MITApp
-Web App Hosting
