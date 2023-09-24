@@ -1,3 +1,45 @@
+// Motivational quotes data
+const quotes = [
+    {
+        text: "Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine.",
+        author: "Unknown"
+    },
+    {
+        text: "The only way to do great work is to love what you do.",
+        author: "Steve Jobs"
+    },
+    {
+        text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+        author: "Winston Churchill"
+    },
+    // Add more quotes here
+];
+
+// Index to track the currently displayed quote
+let currentQuoteIndex = 0;
+
+// Function to display the next quote
+function displayNextQuote() {
+    const quoteTextElement = document.getElementById('quoteText');
+    const authorElement = document.querySelector('.author');
+
+    if (currentQuoteIndex >= quotes.length) {
+        currentQuoteIndex = 0; // Reset to the first quote when reaching the end
+    }
+
+    const quote = quotes[currentQuoteIndex];
+    quoteTextElement.textContent = `"${quote.text}"`;
+    authorElement.textContent = `- ${quote.author}`;
+
+    currentQuoteIndex++;
+}
+
+// Attach event listener to the "New Quote" button
+document.getElementById('newQuoteBtn').addEventListener('click', displayNextQuote);
+
+// Initial display of a quote when the page loads
+displayNextQuote();
+
 // Retrieve existing to-do items from local storage when the page loads
 function getSavedToDoItems() {
     const savedItemsJSON = localStorage.getItem('todoItems');
