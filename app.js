@@ -34,12 +34,6 @@ function displayNextQuote() {
     currentQuoteIndex++;
 }
 
-// Attach event listener to the "New Quote" button
-document.getElementById('newQuoteBtn').addEventListener('click', displayNextQuote);
-
-// Initial display of a quote when the page loads
-displayNextQuote();
-
 // Retrieve existing to-do items from local storage when the page loads
 function getSavedToDoItems() {
     const savedItemsJSON = localStorage.getItem('todoItems');
@@ -100,6 +94,7 @@ function deleteTask(index) {
 }
 
 // Attach event listeners
+document.getElementById('newQuoteBtn').addEventListener('click', displayNextQuote);
 document.getElementById('addTaskBtn').addEventListener('click', addTask);
 document.getElementById('todoList').addEventListener('click', function (event) {
     if (event.target.classList.contains('delete')) {
@@ -108,5 +103,6 @@ document.getElementById('todoList').addEventListener('click', function (event) {
     }
 });
 
-// Initial update of the to-do list when the page loads
+// Initial display of a quote and the to-do list when the page loads
+displayNextQuote();
 updateToDoList();
