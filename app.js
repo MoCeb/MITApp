@@ -12,6 +12,39 @@ const quotes = [
         text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
         author: "Winston Churchill"
     },
+    {
+        text: “It’s only after you’ve stepped outside your comfort zone that you begin to change, grow, and transform.”,
+        author: "Roy T. Bennett"
+    },
+    {
+        text: “All our dreams can come true, if we have the courage to pursue them.”,
+        author: "Walt Disney"
+    }, 
+    {
+        text: “The secret of getting ahead is getting started.”,
+        author: "Mark Twain"
+    }, 
+    {
+        text: “I’ve failed over and over and over again in my life, and that is why I succeed.”,
+        author: "Michael Jordan"
+    }, 
+    {
+        text: “The second best time is now.”,
+        author: "Chinese Proverb"
+    }, 
+    {
+        text: “Everything you can imagine is real.”,
+        author: "Pablo Picasso"
+    }, 
+    {
+        text: “The same boiling water that softens the potato hardens the egg. It’s what you’re made of. Not the circumstances.”,
+        author: "Unknown"
+    }, 
+    {
+        text: “Don’t be afraid to give up the good to go for the great.”,
+        author: "John D. Rockefeller"
+    }, 
+    
     // Add more quotes here
 ];
 
