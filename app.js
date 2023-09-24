@@ -1,34 +1,70 @@
-const quotes = [
-    "Believe in yourself!",
-    "The only way to do great work is to love what you do.",
-    "Don't count the days, make the days count."
-];
-
-let currentQuoteIndex = 0;
-
-function getNextQuote() {
-    document.getElementById("quote").textContent = quotes[currentQuoteIndex];
-    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+// Retrieve existing to-do items from local storage when the page loads
+function getSavedToDoItems() {
+    const savedItemsJSON = localStorage.getItem('todoItems');
+    return savedItemsJSON ? JSON.parse(savedItemsJSON) : [];
 }
 
-document.getElementById("newQuoteBtn").addEventListener("click", getNextQuote);
+// Save the updated to-do items to local storage
+function saveToDoItems(items) {
+    localStorage.setItem('todoItems', JSON.stringify(items));
+}
 
-const todoList = document.getElementById("todoList");
-const taskInput = document.getElementById("task");
-const addTaskBtn = document.getElementById("addTaskBtn");
+// Function to update the to-do list in the HTML
+function updateToDoList() {
+    const todoList = document.getElementById('todoList');
+    todoList.innerHTML = '';
 
-addTaskBtn.addEventListener("click", function() {
-    const taskText = taskInput.value.trim();
-    if (taskText !== "") {
-        const li = document.createElement("li");
+    const savedItems = getSavedToDoItems();
+
+    savedItems.forEach((item, index) => {
+        const li = document.createElement('li');
         li.innerHTML = `
-            <span>${taskText}</span>
-            <button class="delete">Delete</button>
+            <span>${item.text} - Due: ${item.dueDate}</span>
+            <button class="delete" data-index="${index}">Delete</button>
         `;
+
         todoList.appendChild(li);
-        taskInput.value = "";
-        li.querySelector(".delete").addEventListener("click", function() {
-            todoList.removeChild(li);
-        });
+    });
+}
+
+// Add a new task to the to-do list
+function addTask() {
+    const taskInput = document.getElementById('task');
+    const dueDateInput = document.getElementById('dueDate');
+    const taskText = taskInput.value.trim();
+    const dueDate = dueDateInput.value;
+
+    if (taskText !== '') {
+        const savedItems = getSavedToDoItems();
+        savedItems.push({ text: taskText, dueDate: dueDate });
+
+        saveToDoItems(savedItems);
+        taskInput.value = '';
+        dueDateInput.value = '';
+
+        // Update the to-do list in the HTML
+        updateToDoList();
+    }
+}
+
+// Delete a task from the to-do list
+function deleteTask(index) {
+    const savedItems = getSavedToDoItems();
+    savedItems.splice(index, 1);
+    saveToDoItems(savedItems);
+
+    // Update the to-do list in the HTML
+    updateToDoList();
+}
+
+// Attach event listeners
+document.getElementById('addTaskBtn').addEventListener('click', addTask);
+document.getElementById('todoList').addEventListener('click', function (event) {
+    if (event.target.classList.contains('delete')) {
+        const index = event.target.getAttribute('data-index');
+        deleteTask(index);
     }
 });
+
+// Initial update of the to-do list when the page loads
+updateToDoList();
